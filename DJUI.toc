@@ -1,0 +1,9 @@
+## Interface: 90105
+## Title: DJUI
+## Version: 1.0.0
+## Author: Djur
+## eMail: joshua@nozzlegear.com
+## Description: A small collection of features and modifications added to the base World of Warcraft UI to improve functionality.
+## DefaultState: enabled
+
+Core.lua
