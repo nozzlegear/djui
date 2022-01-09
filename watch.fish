@@ -6,4 +6,4 @@ if ! type -q entr
     exit 1
 end
 
-ls *.lua | entr fish -c "./install.fish"
+ls *.lua *.toc | entr fish -c "./install.fish"
