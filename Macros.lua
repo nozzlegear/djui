@@ -38,13 +38,9 @@ function Mod.UpdateGeneralCovenantMacroIcon(self, event, ...)
         if IsInInstance() then
             return
         end
-    elseif event == "UNIT_INVENTORY_CHANGED" then
-        local unitTarget = ...
-
-        if unitTarget ~= "player" then
-            -- This event fires for party/raid members as well. We only care about the player.
-            return
-        end
+    elseif event == "BAG_UPDATE_DELAYED" and covId ~= 1 then
+        -- Bag was updated but the player is not Kyrian so it's not relevant
+        return
     end
 
     print(event)
@@ -72,6 +68,6 @@ local macroFrame = CreateFrame("Frame")
 macroFrame:RegisterEvent("ADDON_LOADED")
 macroFrame:RegisterEvent("COVENANT_CHOSEN")
 macroFrame:RegisterEvent("SPELLS_CHANGED")
-macroFrame:RegisterEvent("UNIT_INVENTORY_CHANGED")
+macroFrame:RegisterEvent("BAG_UPDATE_DELAYED")
 macroFrame:RegisterEvent("UPDATE_MACROS")
 macroFrame:SetScript("OnEvent", Mod.UpdateGeneralCovenantMacroIcon)
