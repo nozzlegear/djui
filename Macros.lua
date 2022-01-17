@@ -11,9 +11,8 @@ local function GetGeneralCovenantMacroIndex()
     return nil
 end
 
--- Get the index of the General Covenant macro once and only update it when macros change
-local macroIndex = GetGeneralCovenantMacroIndex()
-local covId = C_Covenants.GetActiveCovenantID()
+local macroIndex
+local covId
 
 function Mod.UpdateGeneralCovenantMacroIcon(self, event, ...)
     if event == "ADDON_LOADED" then
@@ -22,6 +21,11 @@ function Mod.UpdateGeneralCovenantMacroIcon(self, event, ...)
         if addonName ~= ADDON_NAME then
             return;
         end
+
+        -- Get the index of the General Covenant macro once and only update it when macros change
+        macroIndex = GetGeneralCovenantMacroIndex()
+        -- We get the covenant id here as well because it can be 0 (none) when the module loads
+        covId = C_Covenants.GetActiveCovenantID()
 
         -- Unregister the ADDON_LOADED event
         self:UnregisterEvent("ADDON_LOADED")
@@ -42,8 +46,6 @@ function Mod.UpdateGeneralCovenantMacroIcon(self, event, ...)
         -- Bag was updated but the player is not Kyrian so it's not relevant
         return
     end
-
-    print(event)
 
     if macroIndex then
         if covId == 1 then
