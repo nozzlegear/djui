@@ -6,6 +6,7 @@
 ## Description: A small collection of features and modifications added to the base World of Warcraft UI to improve functionality.
 ## DefaultState: enabled
 
-PandaFood.lua
+FrameSync.lua
 Macros.lua
+PandaFood.lua
 Core.lua

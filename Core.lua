@@ -6,11 +6,12 @@ local function PrintHelp()
     print("`/djui help` to show this help message.")
 end
 
--- Feature: check if out of panda food when rested
+-- Feature: hide the raid unit frames when entering a big bg
 -- Feature: provide a link to look up an enemy arena player on check-pvp.fr at the end of a match.
--- Feature: copy position of player/target/focus frames from one character to another
+-- Feature: play a sound when an enemy/friendly dies in an arena match
 -- Feature: mark arena members when zoning into an arena
 -- Feature: mark healers and tank when zoning into an rbg
+-- Feature: copy position of player/target/focus frames from one character to another
 -- Feature: track rating delta across pvp queue session
 -- Feature: display the name of the current covenant/soulbind/legendary when zoning into any instance (pve and pvp)
 -- Feature: display warning when wearing pve trinkets in pvp and vice versa
@@ -25,8 +26,9 @@ function SlashCmdList.DJUI(msg, editBox)
     -- Trim the string and convert it to lowercase
     msg = string.gsub(msg, "^%s*(.-)%s*$", "%1"):lower()
 
-    if msg == "test" then
-        Mod.UpdateGeneralCovenantMacroIcon(nil, nil)
+    if msg == "mark" then
+        local force = true
+        Mod:MarkPlayers(force)
     else
         PrintHelp()
     end
