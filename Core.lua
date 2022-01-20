@@ -29,6 +29,8 @@ function SlashCmdList.DJUI(msg, editBox)
     if msg == "mark" then
         local force = true
         Mod:MarkPlayers(force)
+    elseif msg == "sync" then
+        Mod:SyncFrames()
     else
         PrintHelp()
     end

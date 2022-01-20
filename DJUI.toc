@@ -8,5 +8,6 @@
 
 FrameSync.lua
 Macros.lua
+Marker.lua
 PandaFood.lua
 Core.lua
