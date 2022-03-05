@@ -46,7 +46,10 @@ function frame:PVP_MATCH_ACTIVE(...)
 end
 
 function frame:GROUP_ROSTER_UPDATE(...)
-    Mod:MarkPlayers()
+    -- Wait 1.5 seconds for the players to load in. If we don't wait, the API will return nil for the player's class and a proper mark won't be found
+    C_Timer.After(1.5, function ()
+        Mod:MarkPlayers()
+    end)
 end
 
 local function GetClassMark(unitId)
