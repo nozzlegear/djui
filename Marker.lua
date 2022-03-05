@@ -66,11 +66,19 @@ local function GetClassMark(unitId)
 end
 
 function Mod:MarkPlayers(force)
+    -- A function to log debug messages if force is true
+    function Log (...)
+        if force then
+            print(...)
+        end
+    end
+
     -- Check which kind of instance the user is in
     local instanceName, instanceType = GetInstanceInfo()
 
     -- Only mark players if we're in an arena match or rbg
     if not force and instanceType ~= "arena" and instanceType ~= "ratedbg" then
+        Log("User is not in an arena or ratedbg, and force is not true. Skipping marks.")
         return;
     end
 
@@ -80,7 +88,10 @@ function Mod:MarkPlayers(force)
     local skippedUnits = { }
 
     local function TryMarkUnit(unit, markOverride)
+        Log("Attempting to mark unit", unit)
+
         if not UnitExists(unit) then
+            Log("Unit "..(unit or "nil").." does not exist")
             return;
         end
 
@@ -88,6 +99,7 @@ function Mod:MarkPlayers(force)
         local existingMark = GetRaidTargetIndex(unit)
 
         if existingMark then
+            Log("Unit", unit, "is already marked with", existingMark)
             usedMarks[existingMark] = unit
             return;
         end
@@ -96,10 +108,11 @@ function Mod:MarkPlayers(force)
         local mark = markOverride or GetClassMark(unit)
 
         if usedMarks[mark] == nil then
-            print("Marking unit with icon", unit, mark)
+            Log("Setting mark for unit "..unit.." to "..mark)
             SetRaidTarget(unit, mark)
             usedMarks[mark] = unit
         else
+            Log("Desired mark", mark, "for unit", unit, "is already in use")
             table.insert(skippedUnits, unit)
         end
     end
@@ -113,6 +126,8 @@ function Mod:MarkPlayers(force)
             -- Only mark healers and tanks in RBGs
             if role == "HEALER" or role == "TANK" then
                 TryMarkUnit("raid" .. i)
+            else
+                Log("Unit", unit, "is not a tank or healer. Skipping mark.")
             end
         end
     else
