@@ -57,7 +57,7 @@ local function GetClassMark(unitId)
     local mark = CLASS_MARKS[className]
 
     if mark == nil then
-        print("WARNING: Could not find a class mark for class ", className, unitId)
+        print("WARNING: Could not find a class mark for class " .. (className or "unknown"), className, unitId)
         -- Return a skull which is not used by any class
         return 8
     end
