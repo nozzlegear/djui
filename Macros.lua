@@ -35,6 +35,16 @@ local function GetMacroIndexes()
     return genMacroIndex or nil, classMacroIndex or nil
 end
 
+local GENERAL_MACRO_SPELLS = {
+    [1] = function () 
+        local isItem = true
+        local itemInfo = GetItemInfo(PHIAL_ITEM_ID)
+        return isItem, itemInfo
+    end,
+    [2] = "Door of Shadows",
+    [3] = "Soulshape",
+    [4] = "Fleshcraft"
+}
 local GEN_MACRO_INDEX
 local CLASS_MACRO_INDEX
 local PLAYER_COVENANT_ID
@@ -81,22 +91,24 @@ function Mod.UpdateGeneralCovenantMacroIcon(self, event, ...)
         return
     end
 
-    if GEN_MACRO_INDEX then
-        if PLAYER_COVENANT_ID == 1 then
-            -- Kyrian, set the macro icon to Phial of Serenity
-            SetMacroItem(GEN_MACRO_INDEX, GetItemInfo(PHIAL_ITEM_ID))
-        elseif PLAYER_COVENANT_ID == 2 then
-            -- Venthyr
-            SetMacroSpell(GEN_MACRO_INDEX, GetSpellInfo("Door of Shadows"))
-        elseif PLAYER_COVENANT_ID == 3 then
-            -- Night Fae
-            SetMacroSpell(GEN_MACRO_INDEX, GetSpellInfo("Soulshape"))
-        elseif PLAYER_COVENANT_ID == 4 then
-            -- Necrolord
-            SetMacroSpell(GEN_MACRO_INDEX, GetSpellInfo("Fleshcraft"))
-        else
-            print("Unhandled Covenant ID:", PLAYER_COVENANT_ID)
+    -- Update the general macro
+    if PLAYER_COVENANT_ID and GEN_MACRO_INDEX then
+        local spell = GENERAL_MACRO_SPELLS[PLAYER_COVENANT_ID]
+        local isItem = false
+        local spellInfo
+
+        if type(spell) == "function" then 
+            isItem, spellInfo = spell() 
+        else 
+            spellInfo = GetSpellInfo(spell) 
         end
+
+        if spellInfo and isItem then 
+            SetMacroItem(GEN_MACRO_INDEX, spellInfo)
+        elseif spellInfo then
+            SetMacroSpell(GEN_MACRO_INDEX, spellInfo)
+        end
+    end
 
     -- Update the class-specific macro
     if PLAYER_COVENANT_ID and CLASS_MACRO_INDEX and Mod["UpdateClassMacros"] then
