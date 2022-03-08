@@ -11,4 +11,5 @@ Macros.lua
 Marker.lua
 PandaFood.lua
 Classes/Shamans.lua
+Classes/Priests.lua
 Core.lua

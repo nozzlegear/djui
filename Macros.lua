@@ -16,18 +16,27 @@ macroFrame:SetScript("OnEvent", function (self, event, ...)
     Mod.UpdateGeneralCovenantMacroIcon(self, event, ...)
 end)
 
--- Gets the Cov_Gen_DJUI macro index. Returns nil if it can't be found.
-local function GetGeneralCovenantMacroIndex()
+-- Gets the Cov_Gen_DJUI and Cov_{CLASSNAME}_DJUI macro index. Returns a tuple containing both indexes, either of which may be nil if they can't be found.
+local function GetMacroIndexes()
+    local classMacroName = Mod.CLASS_MACRO_NAME or nil
+    local genMacroIndex
+    local classMacroIndex
+
     for i = 1, GetNumMacros() do
-        if GetMacroInfo(i) == "Cov_Gen_DJUI" then
-            return i
+        local macroName = GetMacroInfo(i)
+
+        if macroName == "Cov_Gen_DJUI" then
+            genMacroIndex = i
+        elseif macroName == classMacroName then
+            classMacroIndex = i
         end
     end
 
-    return nil
+    return genMacroIndex or nil, classMacroIndex or nil
 end
 
 local GEN_MACRO_INDEX
+local CLASS_MACRO_INDEX
 local PLAYER_COVENANT_ID
 
 function Mod.UpdateGeneralCovenantMacroIcon(self, event, ...)
@@ -38,8 +47,8 @@ function Mod.UpdateGeneralCovenantMacroIcon(self, event, ...)
             return;
         end
 
-        -- Get the index of the General Covenant macro once and only update it when macros change
-        GEN_MACRO_INDEX = GetGeneralCovenantMacroIndex()
+        -- Get the macro indexes once and only update them when macros change
+        GEN_MACRO_INDEX, CLASS_MACRO_INDEX = GetMacroIndexes()
         -- We get the covenant id here as well because it can be 0 (none) when the module loads
         PLAYER_COVENANT_ID = C_Covenants.GetActiveCovenantID()
 
@@ -56,7 +65,7 @@ function Mod.UpdateGeneralCovenantMacroIcon(self, event, ...)
         self:UnregisterEvent("PLAYER_ENTERING_WORLD")
     elseif event == "UPDATE_MACROS" then
         -- The player's macros have changed, update the macro index
-        GEN_MACRO_INDEX = GetGeneralCovenantMacroIndex()
+        GEN_MACRO_INDEX, CLASS_MACRO_INDEX = GetMacroIndexes()
     elseif event == "COVENANT_CHOSEN" then
         -- The player has changed covenants, update the covenant id
         PLAYER_COVENANT_ID = ...
@@ -88,5 +97,9 @@ function Mod.UpdateGeneralCovenantMacroIcon(self, event, ...)
         else
             print("Unhandled Covenant ID:", PLAYER_COVENANT_ID)
         end
+
+    -- Update the class-specific macro
+    if PLAYER_COVENANT_ID and CLASS_MACRO_INDEX and Mod["UpdateClassMacros"] then
+        Mod:UpdateClassMacros(PLAYER_COVENANT_ID, CLASS_MACRO_INDEX)
     end
 end
