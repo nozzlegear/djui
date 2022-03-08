@@ -10,4 +10,5 @@ FrameSync.lua
 Macros.lua
 Marker.lua
 PandaFood.lua
+Classes/Shamans.lua
 Core.lua

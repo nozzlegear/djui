@@ -6,6 +6,7 @@ local function PrintHelp()
     print("`/djui help` to show this help message.")
 end
 
+-- Feature: detect enemy Xan'shi Holy Priest rez lego in arenas
 -- Feature: hide the raid unit frames when entering a big bg
 -- Feature: provide a link to look up an enemy arena player on check-pvp.fr at the end of a match.
 -- Feature: play a sound when an enemy/friendly dies in an arena match
@@ -31,6 +32,10 @@ function SlashCmdList.DJUI(msg, editBox)
         Mod:MarkPlayers(force)
     elseif msg == "sync" then
         Mod:SyncFrames()
+    elseif msg == "shaman rock show" then
+        Mod:ShowShamanRockIcon()
+    elseif msg == "shaman rock hide" then
+        Mod:HideShamanRockIcon()
     else
         PrintHelp()
     end
