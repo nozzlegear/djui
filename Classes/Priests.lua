@@ -226,6 +226,8 @@ local function HideFocusPrompt()
 end
 
 local function CheckFocusFrame()
+    HideFocusPrompt();
+
     -- If the player has a focus that isn't the player themselves, return early
     if UnitExists("focus") and not UnitIsUnit("focus", "player") then
         return;
@@ -242,8 +244,6 @@ local function CheckFocusFrame()
     if shouldHaveFocus then
         -- Note: setting focus is a secure function, addons cannot set it automatically. We can only show a prompt.
         ShowFocusPrompt()
-    else
-        HideFocusPrompt()
     end
 end
 
