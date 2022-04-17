@@ -228,6 +228,11 @@ end
 local function CheckFocusFrame()
     HideFocusPrompt();
 
+    -- Only show the frame in instances
+    if not IsInInstance() then
+        return;
+    end
+
     -- If the player has a focus that isn't the player themselves, return early
     if UnitExists("focus") and not UnitIsUnit("focus", "player") then
         return;
@@ -272,6 +277,8 @@ function priestFrame:PLAYER_ENTERING_WORLD(isInitialLogin, isReloading)
     if isInitialLogin or isReloading then
         CheckSoulbind()
     end
+
+    CheckFocusFrame()
 end
 
 function priestFrame:ADDON_LOADED(addonName)
