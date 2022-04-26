@@ -1,6 +1,6 @@
 ## Interface: 90200
 ## Title: DJUI
-## Version: 1.0.0
+## Version: 1.0.1
 ## Author: Djur
 ## eMail: joshua@nozzlegear.com
 ## Description: A small collection of features and modifications added to the base World of Warcraft UI to improve functionality.
