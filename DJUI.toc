@@ -10,6 +10,11 @@ FrameSync.lua
 Macros.lua
 Marker.lua
 PandaFood.lua
-Classes/Shamans.lua
+Classes/Druids.lua
+Classes/Demon_Hunters.lua
+Classes/Hunters.lua
 Classes/Priests.lua
+Classes/Rogues.lua
+Classes/Shamans.lua
+
 Core.lua

@@ -14,6 +14,13 @@ shamanFrame:SetScript("OnEvent", function (self, event, ...)
     end
 end)
 
+local COVENANT_SPELLS = {
+    [1] = "Vesper Totem",
+    [2] = "Chain Harvest",
+    [3] = "Fae Transfusion",
+    [4] = "Primordial Wave"
+}
+
 local promptFrame
 local isInPreparation
 
@@ -59,6 +66,9 @@ function shamanFrame:ADDON_LOADED(addonName)
     if UnitClassBase("player") ~= "SHAMAN" then
         return;
     end
+    -- Set the Covenant spells table
+    Mod.CLASS_MACRO_NAME = "Cov_Shaman_DJUI"
+    Mod.COVENANT_SPELLS_FOR_CLASS = COVENANT_SPELLS
 
     shamanFrame:RegisterEvent("PVP_MATCH_ACTIVE")
     shamanFrame:RegisterEvent("PVP_MATCH_INACTIVE")
