@@ -111,7 +111,12 @@ function Mod.UpdateGeneralCovenantMacroIcon(self, event, ...)
     end
 
     -- Update the class-specific macro
-    if PLAYER_COVENANT_ID and CLASS_MACRO_INDEX and Mod["UpdateClassMacros"] then
-        Mod:UpdateClassMacros(PLAYER_COVENANT_ID, CLASS_MACRO_INDEX)
+    if PLAYER_COVENANT_ID and CLASS_MACRO_INDEX and Mod["COVENANT_SPELLS_FOR_CLASS"] then
+        local covenantSpell = Mod.COVENANT_SPELLS_FOR_CLASS[PLAYER_COVENANT_ID]
+        local spellInfo = GetSpellInfo(covenantSpell)
+
+        if spellInfo then 
+            SetMacroSpell(CLASS_MACRO_INDEX, spellInfo)
+        end
     end
 end

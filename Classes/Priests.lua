@@ -11,7 +11,7 @@ priestFrame:SetScript("OnEvent", function (self, event, ...)
     end
 end)
 
-local PRIEST_COVENANT_SPELLS = {
+local COVENANT_SPELLS = {
     [1] = "Boon of the Ascended",
     [2] = "Mindgames",
     [3] = "Fae Guardians",
@@ -50,14 +50,6 @@ local POWER_INFUSION_LEGENDARY_ID = 273
 local CONDUIT_PROMPT_FRAME
 
 local FOCUS_PROMPT_FRAME
-
-local function UpdatePriestMacros(covenantID, classMacroIndex)
-    local spellInfo = GetSpellInfo(PRIEST_COVENANT_SPELLS[covenantID])
-
-    if spellInfo then 
-        SetMacroSpell(classMacroIndex, spellInfo)
-    end
-end
 
 local function SetupConduitPromptFrame(self)
     if CONDUIT_PROMPT_FRAME == nil then
@@ -295,11 +287,9 @@ function priestFrame:ADDON_LOADED(addonName)
     SetupConduitPromptFrame()
     SetupFocusPromptFrame()
 
-    -- Set the UpdateClassMacros function
-    function Mod:UpdateClassMacros(...)
-        UpdatePriestMacros(...)
-    end
+    -- Set the Covenant spells table
     Mod.CLASS_MACRO_NAME = "Cov_Priest_DJUI"
+    Mod.COVENANT_SPELLS_FOR_CLASS = COVENANT_SPELLS
 
     priestFrame:RegisterEvent("PVP_MATCH_ACTIVE")
     priestFrame:RegisterEvent("PVP_MATCH_INACTIVE")
