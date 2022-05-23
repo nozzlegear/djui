@@ -13,6 +13,7 @@ PandaFood.lua
 Classes/Druids.lua
 Classes/Demon_Hunters.lua
 Classes/Hunters.lua
+Classes/Monks.lua
 Classes/Priests.lua
 Classes/Rogues.lua
 Classes/Shamans.lua
