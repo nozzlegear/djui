@@ -117,7 +117,7 @@ function Mod:MarkPlayers(force)
         end
     end
 
-    if instanceType == "ratedbg" then 
+    if instanceType == "ratedbg" then
         -- Only 10 players in RBGs
         for i = 1, 10 do
             local unit = "raid" .. i
@@ -147,8 +147,7 @@ function Mod:MarkPlayers(force)
     
     -- Iterate over any players who weren't assigned a mark because of duplicate classes
     -- (e.g. if two shamans, one was assigned a square and the other was skipped because it can't also be assigned a square)
-    for key, unit in pairs(skippedUnits) do
-        local unit = skippedUnits[i]
+    for _, unit in pairs(skippedUnits) do
         -- Find a mark that hasn't been used yet
         for i = 1, MAX_ICON_INDEX do
             if not usedMarks[i] then
