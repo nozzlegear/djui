@@ -40,6 +40,12 @@ function SlashCmdList.DJUI(msg, editBox)
         Mod:CheckSoulbind()
     elseif (msg == "focus") then
         Mod:CheckFocus()
+    elseif msg == "gear" or msg == "gear show" or msg == "show gear" then
+        Mod:ListAndShowGear()
+    elseif msg == "gear hide" or msg == "hide gear" then
+        Mod:HideGearList()
+    elseif msg == "gear test" then
+        Mod:CheckInPreparation()
     else
         PrintHelp()
     end

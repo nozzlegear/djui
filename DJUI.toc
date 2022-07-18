@@ -10,6 +10,7 @@ FrameSync.lua
 Macros.lua
 Marker.lua
 PandaFood.lua
+GearCheck.lua
 Classes/Druids.lua
 Classes/Demon_Hunters.lua
 Classes/Hunters.lua
