@@ -37,7 +37,7 @@ function SlashCmdList.DJUI(msg, editBox)
     elseif msg == "shaman rock hide" then
         Mod:HideShamanRockIcon()
     elseif (msg == "sb" or msg == "soulbind" or msg == "conduits") then
-        Mod:CheckSoulbind()
+        Mod:CheckSoulbind(true)
     elseif (msg == "focus") then
         Mod:CheckFocus()
     elseif msg == "gear" or msg == "gear show" or msg == "show gear" then

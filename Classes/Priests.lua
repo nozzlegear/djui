@@ -300,8 +300,8 @@ function priestFrame:ADDON_LOADED(addonName)
     priestFrame:RegisterEvent("PLAYER_FOCUS_CHANGED")
 end
 
-function Mod:CheckSoulbind()
-    CheckSoulbind()
+function Mod:CheckSoulbind(debug)
+    CheckSoulbind(debug)
 end
 
 function Mod:CheckFocus()
