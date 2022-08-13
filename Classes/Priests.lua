@@ -27,6 +27,9 @@ local COVENANT_ICON_IDS = {
 
 local POWER_INFUSION_ICON_ID = 135939
 
+-- Legendary power ID source: https://wow.tools/dbc/?dbc=runeforgelegendaryability&build=9.2.5.43022
+local POWER_INFUSION_LEGENDARY_ID = 147
+
 local SPEC_IDS = {
     DISCIPLINE = 1,
     HOLY = 2,
@@ -43,9 +46,6 @@ local SPEC_SET_IDS = {
 local ACTIVE_CONDUIT_STATE = 3
 
 local POTENCY_CONDUIT_TYPE = 1
-
--- Legendary power ID source: https://wow.tools/dbc/?dbc=runeforgelegendaryability&build=9.2.5.43022
-local POWER_INFUSION_LEGENDARY_ID = 273
 
 local CONDUIT_PROMPT_FRAME
 
