@@ -295,6 +295,7 @@ function priestFrame:ADDON_LOADED(addonName)
     priestFrame:RegisterEvent("PVP_MATCH_INACTIVE")
     priestFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
     priestFrame:RegisterEvent("SOULBIND_ACTIVATED")
+    priestFrame:RegisterEvent("COVENANT_CHOSEN")
     priestFrame:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
     priestFrame:RegisterEvent("PLAYER_FOCUS_CHANGED")
 end
